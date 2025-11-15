@@ -3,48 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Realiza tu Pago — PayPal</title>
-    <meta name="description" content="Portal de pago seguro. Realiza tu pago de forma rápida, segura y fácil con PayPal, tarjeta de crédito, débito, OXXO o meses sin intereses.">
-    <meta name="keywords" content="pago, PayPal, tarjeta, crédito, débito, pago digital, fintech, seguridad, OXXO, meses sin intereses">
+    <title>Portal de Pagos Corporativo — Az InnovationX</title>
+    <meta name="description" content="Realice sus pagos de forma segura a Az InnovationX. Aceptamos PayPal, tarjetas de crédito y débito.">
+    <meta name="keywords" content="Az InnovationX, portal de pagos, pago corporativo, PayPal, tarjeta de crédito">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="Realiza tu Pago — PayPal">
-    <meta property="og:description" content="Portal de pago seguro. Aceptamos tarjetas, wallets digitales, OXXO y meses sin intereses.">
+    <meta property="og:title" content="Portal de Pagos — Az InnovationX">
+    <meta property="og:description" content="Un portal de pagos seguro y profesional para clientes de Az InnovationX.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="#">
-    <meta property="og:image" content="https://picsum.photos/seed/fintech-payment/1200/630.jpg">
+    <meta property="og:image" content="https://picsum.photos/seed/azinnovationx/1200/630.jpg">
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💳</text></svg>">
     
     <style>
-        /* ===== VARIABLES CSS ===== */
+        /* ===== CORPORATE COLOR PALETTE ===== */
         :root {
-            --primary-color: #005EA6; /* Azul fintech más profundo */
-            --primary-hover: #004175;
-            --secondary-color: #00A8E1; /* Azul brillante para acentos */
-            --success-color: #00C896; /* Verde para éxito/garantías */
-            --text-color: #1A202C;
-            --light-text: #4A5568;
-            --background-color: #F7FAFC;
-            --card-background: #FFFFFF;
-            --border-color: #E2E8F0;
-            --shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
-            --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --primary-color: #0A74DA; /* Azul corporativo, confianza y tecnología */
+            --primary-hover: #085db1;
+            --secondary-color: #00C49A; /* Verde azulado para innovación y acentos */
+            --success-color: #28a745; /* Verde para éxito */
+            --warning-color: #ffc107; /* Amarillo para advertencias */
+            --info-color: #17a2b8; /* Azul claro para información */
+
+            --text-color: #212529; /* Negro suave para legibilidad */
+            --light-text: #6c757d; /* Gris para texto secundario */
+            --background-color: #FFFFFF;
+            --card-background: #F8F9FA;
+            --border-color: #dee2e6;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 7px 14px rgba(0, 0, 0, 0.1);
+            --transition: all 0.2s ease-in-out;
         }
         
         [data-theme="dark"] {
-            --primary-color: #00A8E1;
-            --primary-hover: #005EA6;
-            --text-color: #E2E8F0;
-            --light-text: #A0AEC0;
-            --background-color: #1A202C;
-            --card-background: #2D3748;
-            --border-color: #4A5568;
+            --primary-color: #0A74DA;
+            --primary-hover: #0d8eff;
+            --secondary-color: #00C49A;
+            --text-color: #F8F9FA;
+            --light-text: #adb5bd;
+            --background-color: #121212;
+            --card-background: #1E1E1E;
+            --border-color: #343a40;
         }
         
-        /* ===== ESTILOS GENERALES ===== */
+        /* ===== GLOBAL STYLES ===== */
         * {
             margin: 0;
             padding: 0;
@@ -83,29 +87,42 @@
         }
         
         /* ===== HEADER ===== */
-        header {
-            padding: 3rem 0 2rem;
-            text-align: center;
-            position: relative;
+        .site-header {
+            background-color: var(--background-color);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: var(--transition);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            font-weight: 700;
         }
         
         .theme-toggle {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: var(--card-background);
+            background: transparent;
             border: 1px solid var(--border-color);
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             cursor: pointer;
             color: var(--text-color);
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             transition: var(--transition);
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: var(--shadow);
         }
         
         .theme-toggle:hover {
@@ -113,50 +130,35 @@
         }
         
         h1 {
-            font-size: 2.8rem;
+            font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
-            color: var(--primary-color);
+            color: var(--text-color);
         }
         
         .subtitle {
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             color: var(--light-text);
-            margin-bottom: 2rem;
+            margin-bottom: 0;
         }
 
-        /* Indicador de Proceso */
-        .process-indicator {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 2rem;
-            font-size: 0.9rem;
-            color: var(--light-text);
+        /* ===== HERO SECTION ===== */
+        .hero-section {
+            text-align: center;
+            padding: 3rem 0;
+            background-color: var(--card-background);
+            border-bottom: 1px solid var(--border-color);
         }
-        .process-indicator span {
-            padding: 0 15px;
-            position: relative;
-        }
-        .process-indicator span:not(:last-child)::after {
-            content: '→';
-            position: absolute;
-            right: -5px;
-            color: var(--secondary-color);
-        }
-        .process-indicator .active-step {
-            color: var(--primary-color);
-            font-weight: 600;
-        }
+
         
         /* ===== MAIN CONTENT ===== */
         main {
-            padding-bottom: 3rem;
+            padding: 3rem 0;
         }
         
         .payment-section {
-            background-color: var(--card-background);
-            border-radius: 16px;
+            background-color: var(--background-color);
+            border-radius: 12px;
             padding: 2.5rem;
             margin-bottom: 2rem;
             box-shadow: var(--shadow);
@@ -165,7 +167,7 @@
         }
         
         .payment-section:hover {
-            transform: translateY(-5px);
+            transform: translateY(-3px);
             box-shadow: var(--shadow-hover);
         }
 
@@ -178,6 +180,13 @@
             margin-bottom: 1.5rem;
             text-align: center;
             font-weight: 600;
+        }
+
+        .section-subtext {
+            text-align: center;
+            margin-top: 1rem;
+            color: var(--light-text);
+            font-size: 0.9rem;
         }
         
         /* ===== BOTONES ===== */
@@ -206,13 +215,13 @@
             width: 100%;
             font-size: 1.2rem;
             margin-bottom: 1rem;
-            box-shadow: 0 4px 15px rgba(0, 94, 166, 0.3);
+            box-shadow: 0 4px 15px rgba(10, 116, 218, 0.3);
         }
         
         .btn-primary:hover {
             background-color: var(--primary-hover);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 94, 166, 0.4);
+            box-shadow: 0 6px 20px rgba(10, 116, 218, 0.4);
         }
 
         /* Efecto Shimmer */
@@ -269,47 +278,45 @@
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
         }
         
-        /* ===== SECCIÓN DE CONFIANZA Y SEGURIDAD ===== */
-        .trust-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-            text-align: center;
-        }
-        
-        .trust-item {
-            padding: 1.5rem;
+        /* ===== TRUST & SECURITY SECTION ===== */
+        .trust-security-section {
+            padding: 4rem 0;
             background-color: var(--background-color);
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-        }
-        
-        .trust-icon {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            color: var(--success-color);
         }
 
-        .security-badges {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .container-narrow {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .trust-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 2rem;
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border-color);
-            flex-wrap: wrap;
+            margin-top: 3rem;
         }
-        .badge {
-            display: flex;
+
+        .feature-item {
+            text-align: center;
+        }
+
+        .feature-icon {
+            display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            color: var(--light-text);
-            font-size: 0.9rem;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            margin-bottom: 1.5rem;
         }
-        .badge-icon {
-            font-size: 1.5rem;
+
+        .feature-item h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
         }
         
         /* ===== FAQ ===== */
@@ -361,16 +368,52 @@
         }
         
         /* ===== FOOTER ===== */
-        footer {
+        .site-footer-corp {
             background-color: var(--card-background);
-            padding: 2.5rem 0;
-            text-align: center;
+            color: var(--light-text);
+            padding: 3rem 0;
             border-top: 1px solid var(--border-color);
-            margin-top: 3rem;
+            margin-top: 4rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-about h3 {
+            color: var(--text-color);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links h4, .footer-social h4 {
+            color: var(--text-color);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li a {
+            color: var(--light-text);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links ul li a:hover {
+            color: var(--primary-color);
         }
         
         .copyright {
-            color: var(--light-text);
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
             font-size: 0.9rem;
         }
         
@@ -395,92 +438,61 @@
     </style>
 </head>
 <body>
-    <header>
-        <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">
-            <span id="theme-icon">🌙</span>
-        </button>
+    <header class="site-header">
         <div class="container">
-            <h1>Portal de Pago Seguro</h1>
-            <p class="subtitle">Transacción encriptada y procesada al instante.</p>
-            <div class="process-indicator">
-                <span class="active-step">1. Elige Método</span>
-                <span>2. Confirma Pago</span>
-                <span>3. ¡Listo!</span>
+            <div class="header-content">
+                <div class="logo">
+                    <a href="#">Az InnovationX</a>
+                </div>
+                <nav class="main-nav">
+                    <!-- Puedes añadir enlaces aquí en el futuro -->
+                </nav>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">
+                    <span id="theme-icon">🌙</span>
+                </button>
             </div>
         </div>
     </header>
     
     <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container">
+                <h1>Portal de Pagos Corporativo</h1>
+                <p class="subtitle">Seguridad, confianza y eficiencia para sus transacciones.</p>
+            </div>
+        </section>
+
         <div class="container">
-            <!-- Sección de pago con PayPal -->
+            <!-- Payment Method: PayPal -->
             <section class="payment-section primary fade-in">
-                <h2 class="section-title">Pagar con PayPal</h2>
+                <h2 class="section-title">Opción de Pago Principal: PayPal</h2>
                 <a href="https://www.paypal.com/paypalme/EvaristoSan?locale.x=es_XC&country.x=MX" 
                    class="btn btn-primary" 
                    target="_blank" 
                    rel="noopener noreferrer">
-                    Pagar con PayPal →
+                    Pagar de forma segura con PayPal
                 </a>
-                <p style="text-align: center; margin-top: 1rem; color: var(--success-color); font-weight: 500;">
-                    <span style="margin-right: 5px;">🛡️</span> Protección comprador 100%. Aprobado en segundos.
+                <p class="section-subtext" style="color: var(--success-color);">
+                    <span style="margin-right: 5px;">🛡️</span> 100% de Protección al Comprador.
                 </p>
             </section>
             
-            <!-- Sección de pago alternativo -->
+            <!-- Payment Method: Credit/Debit Card -->
             <section class="payment-section fade-in">
-                <h2 class="section-title">Otras Formas de Pagar</h2>
-                <p style="margin-bottom: 1rem; text-align: center;">
-                    Aceptamos tarjetas de débito/crédito, wallets digitales, pagos en efectivo vía OXXO y financiación de hasta 9 meses sin intereses en tarjetas participantes. Compra fácil, rápida y segura.
+                <h2 class="section-title">Pago con Tarjeta de Crédito/Débito</h2>
+                <p class="section-subtext">
+                    Aceptamos todas las tarjetas principales. El procesamiento es gestionado de forma segura a través de Clip.
                 </p>
                 
                 <div class="payment-icons">
-                    <!-- Icono de Tarjeta Genérica -->
+                    <!-- Generic Card Icon -->
                     <div class="payment-icon" title="Tarjeta de crédito o débito">
-                        <svg width="50" height="32" viewBox="0 0 50 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="50" height="32" rx="4" fill="#E0E0E0"/>
-                            <rect x="4" y="12" width="42" height="3" fill="#9E9E9E"/>
-                            <rect x="4" y="20" width="8" height="2" fill="#9E9E9E"/>
-                            <rect x="38" y="20" width="8" height="2" fill="#9E9E9E"/>
-                            <rect x="6" y="6" width="6" height="4" rx="1" fill="#FFD700"/>
-                        </svg>
+                        <svg width="50" height="32" viewBox="0 0 50 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="50" height="32" rx="4" fill="#E0E0E0"/><rect x="4" y="12" width="42" height="3" fill="#9E9E9E"/><rect x="4" y="20" width="8" height="2" fill="#9E9E9E"/><rect x="38" y="20" width="8" height="2" fill="#9E9E9E"/><rect x="6" y="6" width="6" height="4" rx="1" fill="#FFD700"/></svg>
                     </div>
-                    
-                    <!-- Icono de Apple Pay -->
-                    <div class="payment-icon" title="Apple Pay">
-                        <svg width="55" height="24" viewBox="0 0 55 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M11.923 5.245C11.317 5.953 10.352 6.514 9.387 6.436C9.267 5.479 9.695 4.47 10.254 3.835C10.86 3.127 11.913 2.605 12.771 2.566C12.868 3.562 12.508 4.537 11.923 5.245ZM12.795 6.623C11.424 6.545 10.254 7.424 9.635 7.424C9.003 7.424 8.011 6.662 6.945 6.681C5.561 6.7 4.267 7.521 3.556 8.762C2.108 11.244 3.188 14.865 4.582 16.903C5.28 17.937 6.103 19.082 7.196 19.043C8.229 19.004 8.631 18.335 9.874 18.335C11.104 18.335 11.479 19.043 12.559 19.023C13.698 19.004 14.416 17.983 15.114 16.949C15.911 15.764 16.226 14.606 16.239 14.541C16.213 14.528 14.274 13.786 14.247 11.531C14.221 9.642 15.785 8.749 15.866 8.697C14.846 7.213 13.282 7.05 12.795 6.623Z" fill="black"/>
-                            <path d="M21.734 19.037C21.734 21.6 23.508 22.621 23.535 22.634C23.508 22.702 23.22 23.672 22.495 24.681C21.864 25.55 21.206 26.416 20.16 26.436C19.141 26.455 18.804 25.879 17.634 25.879C16.465 25.879 16.09 26.416 15.131 26.455C14.126 26.494 13.361 25.511 12.729 24.642C11.438 22.818 10.459 19.503 11.777 17.236C12.435 16.081 13.618 15.329 14.922 15.31C15.901 15.291 16.826 15.925 17.419 15.925C18.012 15.925 19.128 15.164 20.298 15.252C20.785 15.269 22.062 15.433 22.907 16.636C22.846 16.673 21.734 17.282 21.734 19.037ZM28.936 11.531V26.241H31.848V20.938H35.936C38.983 20.938 41.099 18.861 41.099 15.723C41.099 12.585 39.023 10.531 36.003 10.531H28.936V11.531ZM31.848 13.335H35.277C37.299 13.335 38.416 14.395 38.416 15.729C38.416 17.063 37.299 18.136 35.264 18.136H31.848V13.335ZM45.535 26.377C47.065 26.377 48.449 25.576 49.11 24.348H49.164V26.241H51.848V17.736C51.848 15.086 49.732 13.322 46.712 13.322C43.895 13.322 41.658 15.111 41.571 17.508H44.187C44.375 16.487 45.354 15.839 46.658 15.839C48.269 15.839 49.215 16.723 49.215 18.162V19.023L45.936 19.236C42.849 19.449 41.164 20.723 41.164 22.787C41.164 24.877 42.895 26.377 45.535 26.377ZM46.375 24.136C44.977 24.136 44.018 23.475 44.018 22.428C44.018 21.355 44.95 20.723 46.521 20.609L49.215 20.409V21.295C49.215 22.915 47.983 24.136 46.375 24.136Z" fill="black"/>
-                        </svg>
-                    </div>
-
-                    <!-- Icono de Google Pay -->
-                    <div class="payment-icon" title="Google Pay">
-                        <svg width="52" height="22" viewBox="0 0 52 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9.418 9.418V12.582H14.727C14.545 13.764 13.364 16.182 9.418 16.182C6.091 16.182 3.455 13.473 3.455 10.091C3.455 6.709 6.091 4 9.418 4C11.273 4 12.636 4.727 13.455 5.545L15.727 3.273C14.273 1.909 12.182 1 9.418 1C4.364 1 0 5.091 0 10.091C0 15.091 4.364 19.182 9.418 19.182C14.909 19.182 18.727 15.273 18.727 10.273C18.727 9.545 18.636 8.909 18.545 8.364H9.418V9.418Z" fill="#4285F4"/>
-                            <path d="M25.636 7.636C23.636 7.636 22 9.091 22 11C22 12.909 23.636 14.364 25.636 14.364C27.636 14.364 29.273 12.909 29.273 11C29.273 9.091 27.636 7.636 25.636 7.636ZM25.636 12.636C24.727 12.636 24 11.909 24 11C24 10.091 24.727 9.364 25.636 9.364C26.545 9.364 27.273 10.091 27.273 11C27.273 11.909 26.545 12.636 25.636 12.636Z" fill="#EA4335"/>
-                            <path d="M38.909 7.636C36.909 7.636 35.273 9.091 35.273 11C35.273 12.909 36.909 14.364 38.909 14.364C40.909 14.364 42.545 12.909 42.545 11C42.545 9.091 40.909 7.636 38.909 7.636ZM38.909 12.636C38 12.636 37.273 11.909 37.273 11C37.273 10.091 38 9.364 38.909 9.364C39.818 9.364 40.545 10.091 40.545 11C40.545 11.909 39.818 12.636 38.909 12.636Z" fill="#FBBC05"/>
-                            <path d="M51.091 8V7.818H49.273V14.182H51.091V10.727C51.091 9.273 52 8.909 52.818 8.909V7.091C52 7.091 51.364 7.455 51.091 8Z" fill="#34A853"/>
-                            <path d="M32.273 7.818H30.455V14.182H32.273V10.727C32.273 9.273 33.182 8.909 34 8.909V7.091C33.182 7.091 32.545 7.455 32.273 7.818Z" fill="#34A853"/>
-                        </svg>
-                    </div>
-
-                    <!-- Icono de Mercado Pago -->
-                    <div class="payment-icon" title="Mercado Pago">
-                        <svg width="50" height="30" viewBox="0 0 50 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="50" height="30" rx="6" fill="#00B0E9"/>
-                            <path d="M15 8L18 22L22 8H25L20 22H16L11 8H15Z" fill="white"/>
-                            <path d="M28 12V15H35V12H28Z" fill="white"/>
-                            <path d="M28 18V21H35V18H28Z" fill="white"/>
-                        </svg>
-                    </div>
-
-                    <!-- Icono de Clip -->
+                    <!-- Clip Icon -->
                     <div class="payment-icon" title="Clip">
-                        <svg width="50" height="30" viewBox="0 0 50 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="50" height="30" rx="6" fill="#6B46C1"/>
-                            <path d="M20 8C20 6.89543 20.8954 6 22 6H28C29.1046 6 30 6.89543 30 8V22C30 23.1046 29.1046 24 28 24H22C20.8954 24 20 23.1046 20 22V8Z" fill="white"/>
-                            <path d="M23 10H27V20H23V10Z" fill="#6B46C1"/>
-                        </svg>
+                        <svg width="50" height="30" viewBox="0 0 50 30" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="50" height="30" rx="6" fill="#6B46C1"/><path d="M20 8C20 6.89543 20.8954 6 22 6H28C29.1046 6 30 6.89543 30 8V22C30 23.1046 29.1046 24 28 24H22C20.8954 24 20 23.1046 20 22V8Z" fill="white"/><path d="M23 10H27V20H23V10Z" fill="#6B46C1"/></svg>
                     </div>
                 </div>
                 
@@ -488,46 +500,57 @@
                    class="btn btn-secondary" 
                    target="_blank" 
                    rel="noopener noreferrer">
-                   Pagar con Tarjeta de credito o debito .
+                   Proceder al pago con tarjeta
                 </a>
-                <p style="text-align: center; margin-top: 1rem; color: var(--light-text); font-size: 0.9rem;">
-                    Pago listo — tú traes el café, nosotros el recibo.
+                <p class="section-subtext">
+                    La transacción se completará en la plataforma segura de Clip.
                 </p>
             </section>
             
-            <!-- Sección de confianza -->
-            <section class="payment-section fade-in">
-                <h2 class="section-title">Tu Seguridad es Nuestra Prioridad</h2>
-                <div class="trust-section">
-                    <div class="trust-item">
-                        <div class="trust-icon">🔐</div>
-                        <h3>Encriptación SSL</h3>
-                        <p>Tus datos están protegidos con encriptación de extremo a extremo.</p>
+            <!-- Trust & Security Section -->
+            <section class="trust-security-section fade-in">
+                <div class="container-narrow">
+                    <h2 class="section-title">Seguridad y Confianza en Cada Transacción</h2>
+                    <div class="trust-features">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <!-- Icon for SSL Encryption -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                            </div>
+                            <h3>Encriptación SSL Avanzada</h3>
+                            <p>Toda la comunicación está protegida con encriptación de 256-bits.</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <!-- Icon for PCI Compliance -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                            </div>
+                            <h3>Cumplimiento Normativo</h3>
+                            <p>Adherimos a los estándares PCI DSS para proteger los datos de tarjetas.</p>
+                        </div>
+                        <div class="feature-item">
+                             <div class="feature-icon">
+                                <!-- Icon for Fraud Monitoring -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path></svg>
+                            </div>
+                            <h3>Monitoreo Constante</h3>
+                            <p>Nuestros sistemas vigilan activamente para prevenir actividades sospechosas.</p>
+                        </div>
                     </div>
-                    <div class="trust-item">
-                        <div class="trust-icon">💳</div>
-                        <h3>Cumplimiento PCI</h3>
-                        <p>Cumplimos con los más altos estándares de seguridad de la industria.</p>
-                    </div>
-                </div>
-                <div class="security-badges">
-                    <div class="badge"><span class="badge-icon">✅</span> Conexión Segura</div>
-                    <div class="badge"><span class="badge-icon">🔒</span> Certificado SSL</div>
-                    <div class="badge"><span class="badge-icon">🌐</span> Pagos Globales</div>
                 </div>
             </section>
             
             <!-- FAQ -->
             <section class="payment-section fade-in">
-                <h2 class="section-title">Preguntas Frecuentes</h2>
+                <h2 class="section-title">Preguntas Frecuentes (FAQ)</h2>
                 <div class="faq">
                     <div class="faq-item">
                         <div class="faq-question">
-                            <span>¿Cómo y cuándo recibo mi comprobante?</span>
+                            <span>¿Cómo y cuándo recibiré mi factura o comprobante de pago?</span>
                             <span class="faq-icon">▼</span>
                         </div>
                         <div class="faq-answer">
-                            <p>Al completar la transacción, recibirás un comprobante de pago automáticamente en el correo electrónico registrado. También estará disponible en el historial de tu cuenta de PayPal o Clip.</p>
+                            <p>Inmediatamente después de completar la transacción, recibirá un comprobante de pago automático en el correo electrónico que haya proporcionado. Este comprobante es emitido por el procesador de pagos (PayPal o Clip).</p>
                         </div>
                     </div>
                 </div>
@@ -535,33 +558,61 @@
         </div>
     </main>
     
-    <footer>
+    <footer class="site-footer-corp">
         <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <h3>Az InnovationX</h3>
+                    <p>Innovación y tecnología para soluciones empresariales.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Navegación</h4>
+                    <ul>
+                        <li><a href="#">Términos de Servicio</a></li>
+                        <li><a href="#">Política de Privacidad</a></li>
+                        <li><a href="#">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>Contacto</h4>
+                    <p>contacto@azinnovationx.com</p>
+                    <div class="social-icons">
+                        <a href="#" aria-label="LinkedIn"></a>
+                        <a href="#" aria-label="Twitter"></a>
+                    </div>
+                </div>
+            </div>
             <div class="copyright">
-                <p>&copy; 2023 Portal de Pago Seguro. Todos los derechos reservados.</p>
+                <p>&copy; 2024 Az InnovationX. Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>
     
     <script>
-        // ===== TOGGLE MODO OSCURO =====
+        // ===== THEME TOGGLE (NO LOCALSTORAGE) =====
         const themeToggle = document.getElementById('theme-toggle');
         const themeIcon = document.getElementById('theme-icon');
         const htmlElement = document.documentElement;
-        
-        const currentTheme = localStorage.getItem('theme') || 'light';
-        htmlElement.setAttribute('data-theme', currentTheme);
-        updateThemeIcon(currentTheme);
-        
+
+        // Detect user's system preference
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+        // Set initial theme based on preference
+        if (prefersDark.matches) {
+            htmlElement.setAttribute('data-theme', 'dark');
+            updateThemeIcon('dark');
+        } else {
+            htmlElement.setAttribute('data-theme', 'light');
+            updateThemeIcon('light');
+        }
+
         themeToggle.addEventListener('click', () => {
-            const theme = htmlElement.getAttribute('data-theme');
-            const newTheme = theme === 'light' ? 'dark' : 'light';
-            
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
             htmlElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
             updateThemeIcon(newTheme);
         });
-        
+
         function updateThemeIcon(theme) {
             themeIcon.textContent = theme === 'light' ? '🌙' : '☀️';
         }
