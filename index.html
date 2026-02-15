@@ -394,20 +394,37 @@
         }
         
         .btn-accent {
-            background-color: var(--accent-color);
+            background-color: var(--secondary-color);
             color: white;
             width: 100%;
             font-size: 1.2rem;
             margin-bottom: 1rem;
-            box-shadow: 0 4px 15px rgba(216, 49, 91, 0.3);
+            box-shadow: 0 4px 15px rgba(62, 146, 204, 0.4);
             position: relative;
             overflow: hidden;
+            animation: pulse-blue 1.5s infinite;
         }
         
         .btn-accent:hover {
-            background-color: #B9224C;
+            background-color: #2c7eb8;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(216, 49, 91, 0.4);
+            box-shadow: 0 6px 20px rgba(62, 146, 204, 0.6);
+        }
+
+        @keyframes pulse-blue {
+            0% {
+                background-color: var(--secondary-color);
+                box-shadow: 0 4px 15px rgba(62, 146, 204, 0.4);
+            }
+            50% {
+                background-color: #1a5f8e;
+                box-shadow: 0 4px 25px rgba(62, 146, 204, 0.8);
+                transform: scale(1.02);
+            }
+            100% {
+                background-color: var(--secondary-color);
+                box-shadow: 0 4px 15px rgba(62, 146, 204, 0.4);
+            }
         }
 
         /* Efecto Shimmer para btn-accent */
