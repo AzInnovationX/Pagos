@@ -396,11 +396,33 @@
         .btn-accent {
             background-color: var(--accent-color);
             color: white;
+            width: 100%;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 15px rgba(216, 49, 91, 0.3);
+            position: relative;
+            overflow: hidden;
         }
         
         .btn-accent:hover {
             background-color: #B9224C;
             transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(216, 49, 91, 0.4);
+        }
+
+        /* Efecto Shimmer para btn-accent */
+        .btn-accent::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        .btn-accent:hover::after {
+            left: 100%;
         }
         
         /* ===== ICONOS DE PAGO ===== */
@@ -747,11 +769,11 @@
                     <img src="https://i.ibb.co/KpvFB5rC/tarjetas-clip.png" alt="Payment Methods" style="width: 100%; max-width: 400px; margin: 2rem auto; display: block; border-radius: 8px;">
                     
                     <a href="https://link.clip.mx/azinnovationx" 
-                       class="btn btn-secondary" 
+                       class="btn btn-accent"
                        target="_blank" 
                        rel="noopener noreferrer"
                        id="clip-btn">
-                       Pagar con Tarjeta O Efectivo
+                       Pagar con Tarjeta y Efectivo →
                     </a>
                     <p style="text-align: center; margin-top: 1rem; color: var(--light-text); font-size: 0.9rem;">
                         Aceptamos tarjetas de crédito/débito, OXXO y meses sin intereses.
@@ -932,7 +954,7 @@
             
             // Restaurar el botón después de un tiempo (en caso de que el usuario no sea redirigido)
             setTimeout(() => {
-                clipBtn.innerHTML = 'Pagar con Clip →';
+                clipBtn.innerHTML = 'Pagar con Tarjeta y Efectivo →';
                 clipBtn.disabled = false;
             }, 3000);
         });
