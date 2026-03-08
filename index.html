@@ -17,9 +17,15 @@
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23005EA6'/><text y='.75em' font-size='70' fill='white' text-anchor='middle' x='50'>AZ</text></svg>">
     
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
         /* ===== VARIABLES CSS ===== */
         :root {
+            --header-bg-rgb: 255, 255, 255;
             /* Paleta de colores corporativa Az InnovationX */
             --primary-color: #0A2463; /* Azul profundo corporativo */
             --primary-hover: #061840;
@@ -36,9 +42,13 @@
             --shadow: 0 10px 30px rgba(10, 36, 99, 0.08);
             --shadow-hover: 0 20px 40px rgba(10, 36, 99, 0.12);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
         }
         
         [data-theme="dark"] {
+            --header-bg-rgb: 10, 36, 99;
             --primary-color: #3E92CC;
             --primary-hover: #0A2463;
             --secondary-color: #457B9D;
@@ -61,7 +71,7 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             line-height: 1.6;
             color: var(--text-color);
             background-color: var(--background-color);
@@ -77,12 +87,25 @@
         
         /* ===== HEADER ===== */
         header {
-            background-color: var(--card-background);
+            background-color: rgba(var(--header-bg-rgb), 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
             position: sticky;
             top: 0;
             z-index: 100;
             transition: var(--transition);
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--secondary-color), transparent);
+            opacity: 0.3;
         }
         
         .header-content {
@@ -171,8 +194,8 @@
         
         /* ===== HERO SECTION ===== */
         .hero {
-            padding: 5rem 0;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            padding: 8rem 0;
+            background: linear-gradient(160deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             color: white;
             position: relative;
             overflow: hidden;
@@ -186,6 +209,41 @@
             width: 100%;
             height: 100%;
             background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            top: -25%;
+            left: -25%;
+            background: radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 40%),
+                        radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 40%);
+            animation: moveBackground 20s infinite linear;
+        }
+
+        @keyframes moveBackground {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-shapes div {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float-shapes 15s infinite ease-in-out;
+        }
+
+        .shape-1 { width: 300px; height: 300px; top: -100px; left: -50px; }
+        .shape-2 { width: 200px; height: 200px; bottom: -50px; right: -50px; animation-delay: -5s !important; }
+        .shape-3 { width: 150px; height: 150px; top: 40%; left: 80%; animation-delay: -10s !important; }
+
+        @keyframes float-shapes {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(10deg); }
         }
         
         .hero-content {
@@ -222,9 +280,18 @@
             align-items: center;
             gap: 0.5rem;
             background-color: rgba(255, 255, 255, 0.1);
-            padding: 0.5rem 1rem;
+            padding: 0.6rem 1.2rem;
             border-radius: 30px;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1), 0 0 10px rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+
+        .trust-badge:hover {
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 0 15px rgba(255, 255, 255, 0.2);
         }
         
         .trust-badge-icon {
@@ -233,7 +300,7 @@
         
         /* ===== MAIN CONTENT ===== */
         main {
-            padding: 4rem 0;
+            padding: 6rem 0;
         }
         
         .section-title {
@@ -266,13 +333,15 @@
         }
         
         .payment-section {
-            background-color: var(--card-background);
-            border-radius: 16px;
-            padding: 3rem;
-            margin-bottom: 3rem;
+            background-color: rgba(var(--header-bg-rgb), 0.7);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: var(--radius-lg);
+            padding: 3.5rem;
+            margin-bottom: 4rem;
             box-shadow: var(--shadow);
             transition: var(--transition);
-            border: 1px solid var(--border-color);
+            border: 1px solid rgba(var(--header-bg-rgb), 0.1);
             position: relative;
             overflow: hidden;
         }
@@ -282,22 +351,39 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 5px;
+            width: 6px;
             height: 100%;
-            background-color: var(--primary-color);
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+        }
+
+        /* Lock icon in top right */
+        .payment-section::after {
+            content: '🔒';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            opacity: 0.2;
+            transition: var(--transition);
         }
         
         .payment-section:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             box-shadow: var(--shadow-hover);
+            border-color: rgba(var(--header-bg-rgb), 0.3);
+        }
+
+        .payment-section:hover::after {
+            opacity: 0.5;
+            transform: scale(1.1);
         }
         
         .payment-section.primary::before {
-            background-color: var(--primary-color);
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
         }
         
         .payment-section.secondary::before {
-            background-color: var(--secondary-color);
+            background: linear-gradient(to bottom, var(--secondary-color), var(--accent-color));
         }
         
         .payment-header {
@@ -334,7 +420,7 @@
         .btn {
             display: inline-block;
             padding: 16px 32px;
-            border-radius: 8px;
+            border-radius: var(--radius-md);
             font-weight: 600;
             text-align: center;
             text-decoration: none;
@@ -344,6 +430,7 @@
             font-size: 1.1rem;
             position: relative;
             overflow: hidden;
+            z-index: 1;
         }
 
         .btn:active {
@@ -351,22 +438,22 @@
         }
         
         .btn-primary {
-            background-color: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             color: white;
             width: 100%;
             font-size: 1.2rem;
             margin-bottom: 1rem;
-            box-shadow: 0 4px 15px rgba(10, 36, 99, 0.3);
+            box-shadow: 0 10px 20px rgba(10, 36, 99, 0.2);
         }
         
         .btn-primary:hover {
-            background-color: var(--primary-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(10, 36, 99, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(10, 36, 99, 0.3);
+            filter: brightness(1.1);
         }
 
         /* Efecto Shimmer */
-        .btn-primary::after {
+        .btn-primary::after, .btn-accent::after {
             content: '';
             position: absolute;
             top: 0;
@@ -374,9 +461,11 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
+            transition: left 0.6s;
+            z-index: -1;
         }
-        .btn-primary:hover::after {
+
+        .btn-primary:hover::after, .btn-accent:hover::after {
             left: 100%;
         }
         
@@ -394,52 +483,19 @@
         }
         
         .btn-accent {
-            background-color: var(--secondary-color);
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
             color: white;
             width: 100%;
             font-size: 1.2rem;
             margin-bottom: 1rem;
-            box-shadow: 0 4px 15px rgba(62, 146, 204, 0.4);
-            position: relative;
-            overflow: hidden;
-            animation: pulse-blue 1.5s infinite;
+            box-shadow: 0 10px 20px rgba(62, 146, 204, 0.2);
+            border: none;
         }
         
         .btn-accent:hover {
-            background-color: #2c7eb8;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(62, 146, 204, 0.6);
-        }
-
-        @keyframes pulse-blue {
-            0% {
-                background-color: var(--secondary-color);
-                box-shadow: 0 4px 15px rgba(62, 146, 204, 0.4);
-            }
-            50% {
-                background-color: #1a5f8e;
-                box-shadow: 0 4px 25px rgba(62, 146, 204, 0.8);
-                transform: scale(1.02);
-            }
-            100% {
-                background-color: var(--secondary-color);
-                box-shadow: 0 4px 15px rgba(62, 146, 204, 0.4);
-            }
-        }
-
-        /* Efecto Shimmer para btn-accent */
-        .btn-accent::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-        .btn-accent:hover::after {
-            left: 100%;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(62, 146, 204, 0.3);
+            filter: brightness(1.1);
         }
         
         /* ===== ICONOS DE PAGO ===== */
@@ -469,32 +525,77 @@
         }
         
         /* ===== SECCIÓN DE CONFIANZA Y SEGURIDAD ===== */
+        #security {
+            position: relative;
+            padding: 2rem;
+            background: linear-gradient(180deg, transparent 0%, rgba(62, 146, 204, 0.03) 50%, transparent 100%);
+            border-radius: var(--radius-lg);
+            margin: 4rem 0;
+        }
+
         .trust-section {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            margin-top: 2rem;
         }
         
         .trust-item {
-            padding: 2rem;
-            background-color: var(--background-color);
-            border-radius: 12px;
+            padding: 3rem 2rem;
+            background: var(--card-background);
+            border-radius: var(--radius-md);
             border: 1px solid var(--border-color);
             text-align: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+        }
+
+        .trust-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            opacity: 1;
             transition: var(--transition);
         }
         
         .trust-item:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow);
-            border-color: var(--secondary-color);
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(62, 146, 204, 0.2);
+        }
+
+        .trust-item:hover::before {
+            height: 6px;
         }
         
         .trust-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--success-color);
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            margin-left: auto;
+            margin-right: auto;
+            background: white;
+            border-radius: 50%;
+            transition: var(--transition);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        [data-theme="dark"] .trust-icon {
+            background: var(--primary-color);
+        }
+
+        .trust-item:hover .trust-icon {
+            transform: scale(1.1) rotate(5deg);
         }
         
         .trust-title {
@@ -558,9 +659,25 @@
         
         /* ===== FOOTER ===== */
         footer {
-            background-color: var(--card-background);
-            padding: 3rem 0 1rem;
+            background-color: #f1f3f5;
+            padding: 5rem 0 2rem;
             border-top: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        [data-theme="dark"] footer {
+            background-color: #05102a;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+            opacity: 0.5;
         }
         
         .footer-content {
@@ -664,7 +781,16 @@
         }
         
         /* ===== RESPONSIVE ===== */
+        @media (max-width: 992px) {
+            .trust-section {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
         @media (max-width: 768px) {
+            .trust-section {
+                grid-template-columns: 1fr;
+            }
             .header-content {
                 flex-direction: column;
                 gap: 1rem;
@@ -718,6 +844,11 @@
     </header>
     
     <section class="hero">
+        <div class="hero-shapes">
+            <div class="shape-1"></div>
+            <div class="shape-2"></div>
+            <div class="shape-3"></div>
+        </div>
         <div class="container">
             <div class="hero-content">
                 <h1>Portal de Pagos Corporativo Az InnovationX</h1>
@@ -834,7 +965,7 @@
                             <span class="faq-icon">▼</span>
                         </div>
                         <div class="faq-answer">
-                            <p>Al completar la transacción, recibirá un comprobante de pago automáticamente en el correo electrónico registrado. También estará disponible en el historial de su cuenta de PayPal o Clip. Nuestro sistema genera comprobantes con validez fiscal para sus registros contables.</p>
+                            <p>Al completar la transacción, recibirá un comprobante de pago automáticamente en el correo electrónico registrado. También estará disponible en el historial de su cuenta de PayPal o Clip.</p>
                         </div>
                     </div>
                 </div>
@@ -846,7 +977,13 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>Az InnovationX</h3>
+                    <a href="#" class="logo" style="margin-bottom: 1.5rem;">
+                        <div class="logo-icon">AZ</div>
+                        <span>Az InnovationX</span>
+                    </a>
+                    <p style="color: var(--light-text); max-width: 300px; font-size: 0.95rem;">
+                        Liderando la innovación en soluciones de pago corporativas seguras y eficientes para el mercado global.
+                    </p>
                 </div>
                 <div class="footer-section">
                     <h3>Enlaces Rápidos</h3>
