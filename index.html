@@ -22,6 +22,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
     <style>
         /* ===== VARIABLES CSS ===== */
         :root {
@@ -59,7 +62,7 @@
             --text-color: #F1FAEE;
             --light-text: #A8DADC;
             --background-color: #1D3557;
-            --card-background: #0A2463;
+            --card-background: #0F1B2D;
             --border-color: #457B9D;
         }
         
@@ -72,7 +75,7 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.6;
+            line-height: 1.8;
             color: var(--text-color);
             background-color: var(--background-color);
             transition: var(--transition);
@@ -253,6 +256,16 @@
             max-width: 800px;
             margin: 0 auto;
         }
+
+        .hero-glass-wrapper {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            margin-bottom: 3rem;
+        }
         
         .hero h1 {
             font-size: 3rem;
@@ -263,7 +276,7 @@
         
         .hero p {
             font-size: 1.3rem;
-            margin-bottom: 2rem;
+            margin-bottom: 0;
             opacity: 0.9;
         }
         
@@ -357,14 +370,14 @@
         }
 
         /* Lock icon in top right */
-        .payment-section::after {
-            content: '🔒';
+        .payment-section .lock-icon {
             position: absolute;
             top: 20px;
             right: 20px;
             font-size: 1.5rem;
             opacity: 0.2;
             transition: var(--transition);
+            color: var(--primary-color);
         }
         
         .payment-section:hover {
@@ -373,7 +386,7 @@
             border-color: rgba(var(--header-bg-rgb), 0.3);
         }
 
-        .payment-section:hover::after {
+        .payment-section:hover .lock-icon {
             opacity: 0.5;
             transform: scale(1.1);
         }
@@ -396,12 +409,13 @@
         .payment-icon {
             width: 60px;
             height: 60px;
-            background-color: var(--background-color);
+            background-color: #FFFFFF;
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
+            padding: 8px !important;
         }
         
         .payment-title {
@@ -411,9 +425,10 @@
         }
         
         .payment-description {
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             color: var(--light-text);
             line-height: 1.7;
+            letter-spacing: 0.2px;
         }
         
         /* ===== BOTONES ===== */
@@ -438,18 +453,18 @@
         }
         
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            background: var(--primary-color);
             color: white;
             width: 100%;
             font-size: 1.2rem;
             margin-bottom: 1rem;
-            box-shadow: 0 10px 20px rgba(10, 36, 99, 0.2);
+            box-shadow: 0 4px 10px rgba(10, 36, 99, 0.15);
         }
         
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(10, 36, 99, 0.3);
-            filter: brightness(1.1);
+            box-shadow: 0 8px 20px rgba(10, 36, 99, 0.25);
+            background: var(--secondary-color);
         }
 
         /* Efecto Shimmer */
@@ -483,18 +498,18 @@
         }
         
         .btn-accent {
-            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+            background: var(--secondary-color);
             color: white;
             width: 100%;
             font-size: 1.2rem;
             margin-bottom: 1rem;
-            box-shadow: 0 10px 20px rgba(62, 146, 204, 0.2);
+            box-shadow: 0 4px 10px rgba(62, 146, 204, 0.15);
             border: none;
         }
         
         .btn-accent:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(62, 146, 204, 0.3);
+            box-shadow: 0 8px 20px rgba(62, 146, 204, 0.25);
             filter: brightness(1.1);
         }
         
@@ -836,7 +851,7 @@
                     <a href="#security">Seguridad</a>
                     <a href="#faq">FAQ</a>
                     <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">
-                        <span id="theme-icon">🌙</span>
+                        <span id="theme-icon"><i class="ph ph-moon"></i></span>
                     </button>
                 </nav>
             </div>
@@ -851,24 +866,26 @@
         </div>
         <div class="container">
             <div class="hero-content">
-                <h1>Portal de Pagos Corporativo Az InnovationX</h1>
-                <p>Transacciones seguras y eficientes para su empresa. Procesamos sus pagos con la más alta tecnología y estándares de seguridad.</p>
+                <div class="hero-glass-wrapper">
+                    <h1>Portal de Pagos Corporativo Az InnovationX</h1>
+                    <p>Transacciones seguras y eficientes para su empresa. Procesamos sus pagos con la más alta tecnología y estándares de seguridad.</p>
+                </div>
                 
                 <div class="trust-badges">
                     <div class="trust-badge">
-                        <span class="trust-badge-icon">🔒</span>
+                        <span class="trust-badge-icon"><i class="ph ph-lock-key"></i></span>
                         <span>Encriptación SSL</span>
                     </div>
                     <div class="trust-badge">
-                        <span class="trust-badge-icon">✅</span>
+                        <span class="trust-badge-icon"><i class="ph ph-check-circle"></i></span>
                         <span>Cumplimiento PCI</span>
                     </div>
                     <div class="trust-badge">
-                        <span class="trust-badge-icon">🌐</span>
+                        <span class="trust-badge-icon"><i class="ph ph-globe"></i></span>
                         <span>Pagos Globales</span>
                     </div>
                     <div class="trust-badge">
-                        <span class="trust-badge-icon">🚀</span>
+                        <span class="trust-badge-icon"><i class="ph ph-rocket"></i></span>
                         <span>Procesamiento Rápido</span>
                     </div>
                 </div>
@@ -885,8 +902,9 @@
                 
                 <!-- Sección de pago con PayPal -->
                 <div class="payment-section primary fade-in">
+                    <i class="ph ph-lock-key lock-icon"></i>
                     <div class="payment-header">
-                        <div class="payment-icon" style="padding: 0; overflow: hidden;"><img src="https://i.ibb.co/B2fVb3hF/original-ba7850362f2416e8bfb8032c57a18ab7.gif" alt="PayPal Icon" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                        <div class="payment-icon" style="overflow: hidden;"><img src="https://i.ibb.co/B2fVb3hF/original-ba7850362f2416e8bfb8032c57a18ab7.gif" alt="PayPal Icon" style="width: 100%; height: 100%; object-fit: contain;"></div>
                         <h3 class="payment-title">PayPal</h3>
                     </div>
                     <p class="payment-description">
@@ -899,15 +917,16 @@
                        id="paypal-btn">
                         Pagar con PayPal →
                     </a>
-                    <p style="text-align: center; margin-top: 1rem; color: var(--success-color); font-weight: 500;">
-                        <span style="margin-right: 5px;">🛡️</span> Protección comprador 100%. Aprobado en segundos.
+                    <p style="text-align: center; margin-top: 1rem; color: var(--success-color); font-weight: 500; display: flex; align-items: center; justify-content: center; gap: 5px;">
+                        <i class="ph ph-shield-check" style="font-size: 1.2rem;"></i> Protección comprador 100%. Aprobado en segundos.
                     </p>
                 </div>
                 
                 <!-- Sección de pago con Clip -->
                 <div class="payment-section secondary fade-in">
+                    <i class="ph ph-lock-key lock-icon"></i>
                     <div class="payment-header">
-                        <div class="payment-icon" style="padding: 0; overflow: hidden;"><img src="https://i.ibb.co/rRpM5NcV/D-NQ-NP-755794-MLM53356797658-012023-O-clip-plus-2-terminal-lector-cobro-con-tarjetas-vales.webp" alt="Clip Icon" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                        <div class="payment-icon" style="overflow: hidden;"><img src="https://i.ibb.co/rRpM5NcV/D-NQ-NP-755794-MLM53356797658-012023-O-clip-plus-2-terminal-lector-cobro-con-tarjetas-vales.webp" alt="Clip Icon" style="width: 100%; height: 100%; object-fit: contain;"></div>
                         <h3 class="payment-title">Tarjeta de Credito Y Debito</h3>
                     </div>
                     <p class="payment-description">
@@ -936,17 +955,17 @@
                 
                 <div class="trust-section">
                     <div class="trust-item">
-                        <div class="trust-icon">🔐</div>
+                        <div class="trust-icon"><i class="ph ph-lock-key-open"></i></div>
                         <h3 class="trust-title">Encriptación SSL</h3>
                         <p>Todos los datos transmitidos están protegidos con encriptación de extremo a extremo, garantizando que su información permanezca confidencial.</p>
                     </div>
                     <div class="trust-item">
-                        <div class="trust-icon">💳</div>
+                        <div class="trust-icon"><i class="ph ph-credit-card"></i></div>
                         <h3 class="trust-title">Cumplimiento PCI</h3>
                         <p>Cumplimos con los más altos estándares de seguridad de la industria de pagos, asegurando que cada transacción sea procesada de forma segura.</p>
                     </div>
                     <div class="trust-item">
-                        <div class="trust-icon">🛡️</div>
+                        <div class="trust-icon"><i class="ph ph-shield-check"></i></div>
                         <h3 class="trust-title">Protección Antifraude</h3>
                         <p>Nuestros sistemas avanzados detectan y previenen actividades fraudulentas en tiempo real, protegiendo tanto a su empresa como a sus clientes.</p>
                     </div>
@@ -1028,7 +1047,7 @@
         });
         
         function updateThemeIcon(theme) {
-            themeIcon.textContent = theme === 'light' ? '🌙' : '☀️';
+            themeIcon.innerHTML = theme === 'light' ? '<i class="ph ph-moon"></i>' : '<i class="ph ph-sun"></i>';
         }
         
         // ===== FAQ ACCORDION =====
