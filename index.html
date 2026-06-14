@@ -41,6 +41,8 @@
 
         html {
             scroll-behavior: smooth;
+            overflow-x: hidden;
+            width: 100%;
         }
 
         body {
@@ -48,6 +50,7 @@
             color: var(--primary-text-color);
             background-color: var(--bg-color);
             overflow-x: hidden;
+            width: 100%;
             position: relative;
         }
 
@@ -56,8 +59,8 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
+            width: 100%;
+            height: 100%;
             z-index: -2;
             pointer-events: none;
         }
@@ -255,9 +258,11 @@
             font-size: 0.9rem;
         }
 
-        .trust-badge:hover {
-            border-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
+        @media (hover: hover) {
+            .trust-badge:hover {
+                border-color: rgba(255, 255, 255, 0.2);
+                transform: translateY(-2px);
+            }
         }
 
         .trust-badge i {
@@ -323,9 +328,11 @@
             background: linear-gradient(135deg, var(--accent-cyan), #d8315b);
         }
 
-        .payment-card:hover {
-            border-color: var(--border-color-active);
-            box-shadow: var(--hover-glow);
+        @media (hover: hover) {
+            .payment-card:hover {
+                border-color: var(--border-color-active);
+                box-shadow: var(--hover-glow);
+            }
         }
 
         .glare {
@@ -405,18 +412,22 @@
 
         .btn-primary:hover {
             box-shadow: 0 12px 30px rgba(6, 182, 212, 0.6);
-            transform: translateY(-3px) scale(1.02);
-        }
-
         .btn-accent {
             background: linear-gradient(135deg, var(--accent-cyan), #d8315b);
             color: #fff;
             box-shadow: 0 8px 25px rgba(216, 49, 91, 0.3);
         }
 
-        .btn-accent:hover {
-            box-shadow: 0 12px 30px rgba(216, 49, 91, 0.6);
-            transform: translateY(-3px) scale(1.02);
+        @media (hover: hover) {
+            .btn-primary:hover {
+                box-shadow: 0 12px 30px rgba(6, 182, 212, 0.6);
+                transform: translateY(-3px) scale(1.02);
+            }
+
+            .btn-accent:hover {
+                box-shadow: 0 12px 30px rgba(216, 49, 91, 0.6);
+                transform: translateY(-3px) scale(1.02);
+            }
         }
 
         .btn-slogan {
@@ -488,10 +499,12 @@
             transition: var(--transition);
         }
 
-        .trust-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--border-color-active);
-            box-shadow: var(--hover-glow);
+        @media (hover: hover) {
+            .trust-card:hover {
+                transform: translateY(-8px);
+                border-color: var(--border-color-active);
+                box-shadow: var(--hover-glow);
+            }
         }
 
         .trust-card-icon {
@@ -776,21 +789,22 @@
                 flex-direction: column;
                 position: fixed;
                 top: 0;
-                right: -100%;
+                right: 0;
                 width: 280px;
                 height: 100vh;
+                transform: translateX(100%);
                 background: rgba(8, 8, 16, 0.95);
                 backdrop-filter: blur(20px);
                 -webkit-backdrop-filter: blur(20px);
                 border-left: 1px solid var(--border-color);
                 padding: 100px 40px;
                 gap: 30px;
-                transition: right 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+                transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
                 z-index: 105;
                 box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
             }
             .nav-links.active {
-                right: 0;
+                transform: translateX(0);
             }
 
             .trust-grid {
@@ -816,6 +830,13 @@
             }
             .container {
                 padding: 0 16px;
+            }
+            .notification {
+                bottom: 20px;
+                right: 20px;
+                left: 20px;
+                max-width: none;
+                width: calc(100% - 40px);
             }
         }
     </style>
@@ -1101,10 +1122,12 @@
             let mouseX = 0;
             let mouseY = 0;
 
-            document.addEventListener('mousemove', (e) => {
-                mouseX = (e.clientX / window.innerWidth) - 0.5;
-                mouseY = (e.clientY / window.innerHeight) - 0.5;
-            });
+            if (window.innerWidth > 768 && !window.matchMedia("(pointer: coarse)").matches) {
+                document.addEventListener('mousemove', (e) => {
+                    mouseX = (e.clientX / window.innerWidth) - 0.5;
+                    mouseY = (e.clientY / window.innerHeight) - 0.5;
+                });
+            }
 
             const clock = new THREE.Clock();
 
@@ -1123,7 +1146,11 @@
 
             tick();
 
+            let lastWidth = window.innerWidth;
             window.addEventListener('resize', () => {
+                if (window.innerWidth === lastWidth) return;
+                lastWidth = window.innerWidth;
+
                 camera.aspect = window.innerWidth / window.innerHeight;
                 camera.updateProjectionMatrix();
                 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -1135,6 +1162,10 @@
         // 2. 3D PERSPECTIVE TILT EFFECT ON CARDS
         // -------------------------------------------------------------
         const initCardTilt = () => {
+            // Disable card tilt on mobile and touch devices to prevent wiggling/jumping while scrolling
+            if (window.innerWidth <= 768 || window.matchMedia("(pointer: coarse)").matches) {
+                return;
+            }
             const cards = document.querySelectorAll('.payment-card');
             
             cards.forEach(card => {
