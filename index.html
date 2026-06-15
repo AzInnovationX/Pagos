@@ -1307,11 +1307,9 @@
         };
 
         // -------------------------------------------------------------
-        // 5. TRANSACTION BUTTON LOADER AND NOTIFICATION
+        // 5. TRANSACTION BUTTON NOTIFICATION (sin interceptar navegacion)
         // -------------------------------------------------------------
         const initPaymentFlow = () => {
-            const paypalBtn = document.getElementById('paypal-btn');
-            const clipBtn = document.getElementById('clip-btn');
             const notification = document.getElementById('notification');
             const notificationClose = document.getElementById('notification-close');
 
@@ -1326,49 +1324,16 @@
                 }, 4000);
             };
 
-            const handlePaymentClick = (btn, originalHTML) => {
-                return (e) => {
-                    e.preventDefault();
-                    const url = btn.getAttribute('href');
-
-                    // Show loading state briefly for UX feedback
-                    btn.innerHTML = '<span class="loading"></span> Conectando...';
-                    btn.style.pointerEvents = 'none';
-                    showNotification();
-
-                    const restore = () => {
-                        btn.innerHTML = originalHTML;
-                        btn.style.pointerEvents = 'auto';
-                    };
-
-                    // FIXED: Always open in a new tab synchronously within the click
-                    // handler. Browsers only allow window.open() without popup-blocking
-                    // when called directly inside a user-initiated event (not in a
-                    // setTimeout). After opening, restore the button state after a short
-                    // delay so the user can click again if needed.
-                    const newWin = window.open(url, '_blank', 'noopener,noreferrer');
-
-                    if (newWin) {
-                        // Successfully opened in new tab — restore button after animation
-                        setTimeout(restore, 1500);
-                    } else {
-                        // Popup was blocked by the browser; navigate in the same tab
-                        // as the only reliable fallback. Restore first so user sees it.
-                        restore();
-                        window.location.href = url;
-                    }
-                };
-            };
-
-            if (paypalBtn) {
-                const originalHTML = paypalBtn.innerHTML;
-                paypalBtn.addEventListener('click', handlePaymentClick(paypalBtn, originalHTML));
-            }
-
-            if (clipBtn) {
-                const originalHTML = clipBtn.innerHTML;
-                clipBtn.addEventListener('click', handlePaymentClick(clipBtn, originalHTML));
-            }
+            // Solo mostrar notificacion visual. El <a href target="_blank"> maneja
+            // la navegacion de forma nativa sin bloqueos de popup.
+            ['paypal-btn', 'clip-btn'].forEach(id => {
+                const btn = document.getElementById(id);
+                if (btn) {
+                    btn.addEventListener('click', () => {
+                        showNotification();
+                    });
+                }
+            });
 
             if (notificationClose) {
                 notificationClose.addEventListener('click', () => {
