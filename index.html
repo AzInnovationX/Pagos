@@ -1326,15 +1326,12 @@
                 }, 4000);
             };
 
-            // Detects if popup was blocked (Safari/iOS/Android block window.open in async)
-            const isTouchDevice = () => window.matchMedia('(pointer: coarse)').matches;
-
             const handlePaymentClick = (btn, originalHTML) => {
                 return (e) => {
                     e.preventDefault();
                     const url = btn.getAttribute('href');
 
-                    // Show loading state
+                    // Show loading state briefly for UX feedback
                     btn.innerHTML = '<span class="loading"></span> Conectando...';
                     btn.style.pointerEvents = 'none';
                     showNotification();
@@ -1344,27 +1341,21 @@
                         btn.style.pointerEvents = 'auto';
                     };
 
-                    // On touch/mobile: direct navigation is the ONLY reliable method.
-                    // window.open in a setTimeout is blocked by every major mobile browser.
-                    if (isTouchDevice()) {
-                        setTimeout(() => {
-                            restore();
-                            window.location.href = url;
-                        }, 1200);
-                        return;
-                    }
-
-                    // On desktop: open immediately in click handler (before any async),
-                    // then just restore the button after a short delay.
+                    // FIXED: Always open in a new tab synchronously within the click
+                    // handler. Browsers only allow window.open() without popup-blocking
+                    // when called directly inside a user-initiated event (not in a
+                    // setTimeout). After opening, restore the button state after a short
+                    // delay so the user can click again if needed.
                     const newWin = window.open(url, '_blank', 'noopener,noreferrer');
-                    if (!newWin) {
-                        // Popup was blocked even on desktop, fallback
-                        setTimeout(() => {
-                            restore();
-                            window.location.href = url;
-                        }, 1200);
-                    } else {
+
+                    if (newWin) {
+                        // Successfully opened in new tab — restore button after animation
                         setTimeout(restore, 1500);
+                    } else {
+                        // Popup was blocked by the browser; navigate in the same tab
+                        // as the only reliable fallback. Restore first so user sees it.
+                        restore();
+                        window.location.href = url;
                     }
                 };
             };
