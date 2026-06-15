@@ -180,9 +180,37 @@
             .hero-subtitle { font-size: 1.1rem; }
             .footer-grid { grid-template-columns: 1fr; gap: 30px; }
 
-            /* Solución al error de clicks/taps en móviles desactivando transformaciones 3D */
-            .payment-card { transform: none !important; transform-style: flat !important; }
-            .card-depth-1, .card-depth-2, .card-depth-3 { transform: none !important; }
+            /* ==========================================
+               CORRECCIÓN DETALLADA PARA DISPOSITIVOS MÓVILES
+               ========================================== */
+            /* 1. Desactivamos por completo la perspectiva 3D del contenedor */
+            .payment-grid {
+                perspective: none !important;
+            }
+            .payment-card-container {
+                transform: none !important;
+            }
+            /* 2. Aplanamos las tarjetas y eliminamos su rotación 3D */
+            .payment-card { 
+                transform: none !important; 
+                transform-style: flat !important;
+                perspective: none !important;
+            }
+            /* 3. Aplanamos todas las capas internas con profundidad Z */
+            .card-depth-1, .card-depth-2, .card-depth-3 { 
+                transform: none !important; 
+                transform-style: flat !important;
+            }
+            /* 4. Ocultamos la capa glare para evitar que bloquee clics (incluso con pointer-events: none) */
+            .glare {
+                display: none !important;
+            }
+            /* 5. Aseguramos que los botones se rendericen al frente de todo y capturen los taps */
+            .btn {
+                position: relative !important;
+                z-index: 9999 !important;
+                pointer-events: auto !important;
+            }
         }
 
         body.nav-open { overflow: hidden; }
@@ -260,14 +288,18 @@
                         </div>
                         <div class="card-depth-3">
                             <!--
-                                FIX MÓVIL: Se eliminó e.preventDefault() + setTimeout del handler JS.
-                                Ahora el enlace es un <a> nativo con href directo.
-                                En iOS/Android, cualquier redirección en setTimeout es bloqueada
-                                como popup no autorizado. El <a> nativo siempre funciona.
+                                FIX MÓVIL DE REDIRECCIÓN Y COMPATIBILIDAD:
+                                Agregado target="_blank" y rel="noopener noreferrer" para permitir
+                                que el navegador del móvil abra la URL universal (paypal.me) en una
+                                nueva pestaña. Esto previene que el sistema operativo y el navegador
+                                bloqueen el redireccionamiento a la aplicación nativa o muestren
+                                advertencias de popups no autorizados.
                             -->
                             <a href="https://paypal.me/EvaristoSan?locale.x=es_XC&country.x=MX"
                                class="btn btn-primary"
-                               id="paypal-btn">
+                               id="paypal-btn"
+                               target="_blank"
+                               rel="noopener noreferrer">
                                 Pagar con PayPal <i class="fas fa-arrow-right"></i>
                             </a>
                             <div class="btn-slogan">
@@ -298,7 +330,9 @@
                         <div class="card-depth-3">
                             <a href="https://link.clip.mx/azinnovationx"
                                class="btn btn-accent"
-                               id="clip-btn">
+                               id="clip-btn"
+                               target="_blank"
+                               rel="noopener noreferrer">
                                 Pagar con Tarjeta / OXXO <i class="fas fa-arrow-right"></i>
                             </a>
                             <div class="btn-slogan" style="color: #d8315b;">
