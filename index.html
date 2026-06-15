@@ -946,8 +946,6 @@
                         <div class="card-depth-3">
                             <a href="https://paypal.me/EvaristoSan?locale.x=es_XC&country.x=MX" 
                                class="btn btn-primary" 
-                               target="_blank" 
-                               rel="noopener noreferrer"
                                id="paypal-btn">
                                 Pagar con PayPal <i class="fas fa-arrow-right"></i>
                             </a>
@@ -979,8 +977,6 @@
                         <div class="card-depth-3">
                             <a href="https://link.clip.mx/azinnovationx" 
                                class="btn btn-accent" 
-                               target="_blank" 
-                               rel="noopener noreferrer"
                                id="clip-btn">
                                 Pagar con Tarjeta / OXXO <i class="fas fa-arrow-right"></i>
                             </a>
@@ -1307,7 +1303,7 @@
         };
 
         // -------------------------------------------------------------
-        // 5. TRANSACTION BUTTON NOTIFICATION (sin interceptar navegacion)
+        // 5. BOTONES DE PAGO - compatibles con movil y escritorio
         // -------------------------------------------------------------
         const initPaymentFlow = () => {
             const notification = document.getElementById('notification');
@@ -1324,13 +1320,19 @@
                 }, 4000);
             };
 
-            // Solo mostrar notificacion visual. El <a href target="_blank"> maneja
-            // la navegacion de forma nativa sin bloqueos de popup.
+            // Navegacion directa: funciona en movil y escritorio sin bloqueos.
+            // El onclick del elemento ya maneja window.location.href;
+            // aqui solo mostramos la notificacion visual.
             ['paypal-btn', 'clip-btn'].forEach(id => {
                 const btn = document.getElementById(id);
                 if (btn) {
-                    btn.addEventListener('click', () => {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
                         showNotification();
+                        var url = this.getAttribute('href');
+                        setTimeout(function() {
+                            window.location.href = url;
+                        }, 300);
                     });
                 }
             });
