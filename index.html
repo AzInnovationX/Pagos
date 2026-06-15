@@ -1258,25 +1258,45 @@
             };
 
             if (paypalBtn) {
-                paypalBtn.addEventListener('click', () => {
+                paypalBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const url = paypalBtn.getAttribute('href');
+                    const newWin = window.open('about:blank', '_blank');
+
                     paypalBtn.innerHTML = '<span class="loading"></span> Conectando...';
                     paypalBtn.style.pointerEvents = 'none';
                     showNotification();
+
                     setTimeout(() => {
                         paypalBtn.innerHTML = 'Pagar con PayPal <i class="fas fa-arrow-right"></i>';
                         paypalBtn.style.pointerEvents = 'auto';
+                        if (newWin) {
+                            newWin.location.href = url;
+                        } else {
+                            window.location.href = url;
+                        }
                     }, 3500);
                 });
             }
 
             if (clipBtn) {
-                clipBtn.addEventListener('click', () => {
+                clipBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const url = clipBtn.getAttribute('href');
+                    const newWin = window.open('about:blank', '_blank');
+
                     clipBtn.innerHTML = '<span class="loading"></span> Conectando...';
                     clipBtn.style.pointerEvents = 'none';
                     showNotification();
+
                     setTimeout(() => {
                         clipBtn.innerHTML = 'Pagar con Tarjeta / OXXO <i class="fas fa-arrow-right"></i>';
                         clipBtn.style.pointerEvents = 'auto';
+                        if (newWin) {
+                            newWin.location.href = url;
+                        } else {
+                            window.location.href = url;
+                        }
                     }, 3500);
                 });
             }
