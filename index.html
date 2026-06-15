@@ -179,6 +179,10 @@
             h1.hero-title { font-size: 2.2rem; }
             .hero-subtitle { font-size: 1.1rem; }
             .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+
+            /* Solución al error de clicks/taps en móviles desactivando transformaciones 3D */
+            .payment-card { transform: none !important; transform-style: flat !important; }
+            .card-depth-1, .card-depth-2, .card-depth-3 { transform: none !important; }
         }
 
         body.nav-open { overflow: hidden; }
